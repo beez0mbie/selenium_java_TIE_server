@@ -41,7 +41,8 @@ public abstract class Page {
         try {
             ensurePageLoaded();
             return true;
-        } catch (TimeoutException to) {
+        } catch (Exception e) {
+            System.out.println("!!!!!!!!!!!!!" + e.getMessage());
             return false;
         }
     }

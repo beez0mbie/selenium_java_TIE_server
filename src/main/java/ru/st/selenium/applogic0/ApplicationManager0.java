@@ -12,62 +12,62 @@ import ru.st.selenium.webdriver.WebDriverFactory;
 
 public class ApplicationManager0 implements ApplicationManager {
 
-  private UserHelper userHelper;
-  private FilmHelper filmHelper;
-  private NavigationHelper navHelper;
+    private UserHelper userHelper;
+    private FilmHelper filmHelper;
+    private NavigationHelper navHelper;
 
-  private WebDriver driver;
-  private String baseUrl;
-  
-  public ApplicationManager0() {
-    baseUrl = PropertyLoader.loadProperty("site.url");
-    String gridHubUrl = PropertyLoader.loadProperty("grid2.hub");
+    private WebDriver driver;
+    private String baseUrl;
 
-    Browser browser = new Browser();
-    browser.setName(PropertyLoader.loadProperty("browser.name"));
-    browser.setVersion(PropertyLoader.loadProperty("browser.version"));
-    browser.setPlatform(PropertyLoader.loadProperty("browser.platform"));
+    public ApplicationManager0() {
+        baseUrl = PropertyLoader.loadProperty("site.url");
+        String gridHubUrl = PropertyLoader.loadProperty("grid2.hub");
 
-    String username = PropertyLoader.loadProperty("user.username");
-    String password = PropertyLoader.loadProperty("user.password");
-    
-    driver = WebDriverFactory.getInstance(gridHubUrl, browser, username, password);
-    // driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        Browser browser = new Browser();
+        browser.setName(PropertyLoader.loadProperty("browser.name"));
+        browser.setVersion(PropertyLoader.loadProperty("browser.version"));
+        browser.setPlatform(PropertyLoader.loadProperty("browser.platform"));
 
-    userHelper = new UserHelper0(this);
-    filmHelper = new FilmHelper0(this);
-    navHelper = new NavigationHelper0(this);
+        String username = PropertyLoader.loadProperty("user.username");
+        String password = PropertyLoader.loadProperty("user.password");
 
-    getNavigationHelper().openMainPage();
-  }
-  
-  @Override
-  public UserHelper getUserHelper() {
-    return userHelper;
-  }
+        driver = WebDriverFactory.getInstance(gridHubUrl, browser, username, password);
+        // driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-  @Override
-  public FilmHelper getFilmHelper() {
-    return filmHelper;
-  }
+        userHelper = new UserHelper0(this);
+        filmHelper = new FilmHelper0(this);
+        navHelper = new NavigationHelper0(this);
 
-  @Override
-  public NavigationHelper getNavigationHelper() {
-    return navHelper;
-  }
-
-  protected WebDriver getWebDriver() {
-    return driver;
-  }
-
-  protected String getBaseUrl() {
-    return baseUrl;
-  }
-
-  @Override
-  public void stop() {
-    if (driver != null) {
-      driver.quit();
+        getNavigationHelper().openMainPage();
     }
-  }
+
+    @Override
+    public UserHelper getUserHelper() {
+        return userHelper;
+    }
+
+    @Override
+    public FilmHelper getFilmHelper() {
+        return filmHelper;
+    }
+
+    @Override
+    public NavigationHelper getNavigationHelper() {
+        return navHelper;
+    }
+
+    protected WebDriver getWebDriver() {
+        return driver;
+    }
+
+    protected String getBaseUrl() {
+        return baseUrl;
+    }
+
+    @Override
+    public void stop() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 }

@@ -3,6 +3,7 @@ package ru.st.selenium.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -14,6 +15,8 @@ public class LoginPage extends AnyPage {
 
 	@FindBy(id = "username")
 	private WebElement usernameField;
+
+    By byUsernameField = By.id("username");
 
     @FindBy(id = "password")
     private WebElement passwordField;
@@ -38,7 +41,11 @@ public class LoginPage extends AnyPage {
 
     public LoginPage ensurePageLoaded() {
         super.ensurePageLoaded();
-        wait.until(presenceOfElementLocated(By.id("username")));
+//        try {
+        wait.until(presenceOfElementLocated(byUsernameField));
+//        } catch (Exception e) {
+//            System.out.println("EXPECTED ERROR: " + e.getMessage());
+//        }
         return this;
     }
 }
