@@ -31,6 +31,8 @@ public class UserPage extends InternalPage {
     @FindBy(xpath = "/html/body/div[5]/div/div/div/form/div[1]/div/ul/li/a")
     private WebElement roles;
 
+    private By byRoles = By.xpath("/html/body/div[5]/div/div/div/form/div[1]/div/ul/li/a");
+
     @FindBy(xpath = "//*[@id=\"dropdown-menu-roles\"]")
     private WebElement dropdownButton;
 
@@ -66,14 +68,14 @@ public class UserPage extends InternalPage {
         rolesDropdown().selectByVisibleText(user.getRole());
     }
 
-    public String getUserLogin(User user) {
+    public String getUserLogin(String login) {
         usersTableCell = driver.findElements(byTableCell);
         for (WebElement cell : usersTableCell) {
-            if (cell.getText().trim().equals(user.getLogin())) {
+            if (cell.getText().trim().equals(login)) {
                 return cell.getText();
             }
         }
-        System.out.println("Не найден логин в таблице " + user.getLogin());
+        System.out.println("Не найден логин в таблице " + login);
         return "!";
     }
 
@@ -82,10 +84,15 @@ public class UserPage extends InternalPage {
         wait.until(presenceOfElementLocated(byUserForm));
     }
 
-    public void setCurrentUser(User user) {
+    public void setCurrentUserRole(String getRole) {
         clickCreateNewUser();
         dropdownButton.click();
-        selectRole(user);
+        roleList = driver.findElements(byRoles);
+        for (WebElement role : roleList) {
+            if (role.getAttribute("data-title").trim().equals(getRole)) {
+                role.click();
+            }
+        }
         submitButton.click();
     }
 //

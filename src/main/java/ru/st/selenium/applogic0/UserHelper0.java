@@ -3,7 +3,6 @@ package ru.st.selenium.applogic0;
 import ru.st.selenium.applogic.UserHelper;
 import ru.st.selenium.model.User;
 import ru.st.selenium.pages.InternalPage;
-import ru.st.selenium.pages.UserEditPage;
 
 public class UserHelper0 extends DriverBasedHelper implements UserHelper {
 
@@ -53,7 +52,16 @@ public class UserHelper0 extends DriverBasedHelper implements UserHelper {
         pages.internalPage.ensurePageLoaded()
                 .clickUserPage();
         pages.userPage.ensurePageLoaded()
-                .setCurrentUser(user);
+                .setCurrentUserRole(user.getRole());
+        pages.userEditPage.ensurePageLoaded()
+                .setLogin(user.getLogin())
+                .setName(user.getName())
+                .setPassword(user.getPassword())
+                .setConfirmPassword(user.getPassword())
+                .setPhone(user.getPhone())
+                .setMetroLine(user.getMetroLine())
+                .setMetroStation(user.getMetroStation())
+                .clickSubmitButton();
     }
 
     @Override
@@ -91,6 +99,6 @@ public class UserHelper0 extends DriverBasedHelper implements UserHelper {
 
     @Override
     public boolean isUserInUsersTable(User user) {
-        return pages.userPage.ensurePageLoaded().getUserLogin(user).equals(user.getLogin());
+        return pages.userPage.ensurePageLoaded().getUserLogin(user.getLogin()).equals(user.getLogin());
     }
 }

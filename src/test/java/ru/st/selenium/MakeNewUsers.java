@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import ru.st.selenium.model.User;
 import ru.st.selenium.pages.TestBase;
 
+import static org.testng.Assert.assertTrue;
+
 /**
  * Created by a.shmelkov on 05.05.2017.
  */
@@ -12,17 +14,19 @@ public class MakeNewUsers extends TestBase {
             .setLogin("admin")
             .setPassword("admin");
     private User oti = new User()
-            .setLogin("oti")
-            .setPassword("oti")
-            .setRole("Оператор ОТИ")
-            .setMetroStation("Планерная")
-            .setName("loser")
-            .setPhone("1111");
+            .setLogin("disp02")
+            .setName("Winner")
+            .setPassword("otb")
+            .setRole("Диспетчер")
+            .setPhone("123")
+            .setMetroStation("Каширская")
+            .setMetroLine("Сокольническая линия");
 
     @Test(description = "ID = <T01> Создать пользователя")
     public void test01() throws Exception {
         app.getUserHelper().loginAs(admin);
         app.getUserHelper().createNewUser(oti);
+        assertTrue(app.getUserHelper().isUserInUsersTable(oti));
 
     }
 }
