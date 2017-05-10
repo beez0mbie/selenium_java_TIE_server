@@ -22,7 +22,7 @@ public class NavigationHelper0 extends DriverBasedHelper implements NavigationHe
     }
 
     @Override
-    public void gotoUserProfilePage() {
+    public void gotoUserEditPage() {
         pages.internalPage.ensurePageLoaded().clickChangePassword();
 //    driver.findElement(By.cssSelector("nav a[href $= '?go=profile']"))
 //      .click();
@@ -30,11 +30,11 @@ public class NavigationHelper0 extends DriverBasedHelper implements NavigationHe
     }
 
     @Override
-    public void gotoUserManagementPage() {
-//    pages.internalPage.ensurePageLoaded().clickUserManagementLink();
+    public void gotoUserPage() {
+        pages.internalPage.ensurePageLoaded().clickUserPage();
         //driver.findElement(By.cssSelector("nav a[href $= '?go=users']"))
         //  .click();
-        //openRelativeUrl("?go=users");
+//        openRelativeUrl("?go=users");
     }
 
 }

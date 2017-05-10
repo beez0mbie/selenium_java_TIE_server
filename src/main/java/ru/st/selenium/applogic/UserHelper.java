@@ -25,4 +25,6 @@ public interface UserHelper {
     boolean isRoleFieldOk(User user);
 
     boolean isUserInUsersTable(User user);
+
+    void createNewUser(User oti);
 }

@@ -49,6 +49,14 @@ public class UserHelper0 extends DriverBasedHelper implements UserHelper {
     }
 
     @Override
+    public void createNewUser(User user) {
+        pages.internalPage.ensurePageLoaded()
+                .clickUserPage();
+        pages.userPage.ensurePageLoaded()
+                .setCurrentUser(user);
+    }
+
+    @Override
     public boolean isLoggedIn() {
         return pages.internalPage.waitPageLoaded();
     }
@@ -73,12 +81,12 @@ public class UserHelper0 extends DriverBasedHelper implements UserHelper {
     @Override
     public boolean isLoginFieldOk(User user) {
 //    UserEditPage userEditPage = pages.userEditPage.ensurePageLoaded();
-        return pages.userEditPage.getLoginField().equals(user.getLogin());
+        return pages.userEditPage.ensurePageLoaded().getLoginField().equals(user.getLogin());
     }
 
     @Override
     public boolean isRoleFieldOk(User user) {
-        return pages.userEditPage.getRole().equals(user.getRole());
+        return pages.userEditPage.ensurePageLoaded().getRole().equals(user.getRole());
     }
 
     @Override

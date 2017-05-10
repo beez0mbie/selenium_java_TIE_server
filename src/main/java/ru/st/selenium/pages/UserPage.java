@@ -26,11 +26,16 @@ public class UserPage extends InternalPage {
 
     private By byTableCell = By.className("b-table__cell");
 
+    private By byUserForm =  By.className("user_form");
+
     @FindBy(xpath = "/html/body/div[5]/div/div/div/form/div[1]/div/ul/li/a")
     private WebElement roles;
 
     @FindBy(xpath = "//*[@id=\"dropdown-menu-roles\"]")
     private WebElement dropdownButton;
+
+    @FindBy(css = ".dropdown-menu")
+    private WebElement dropdownMenu;
 
     @FindBy(css = ".button-success")
     private WebElement submitButton;
@@ -53,6 +58,13 @@ public class UserPage extends InternalPage {
         return permissionDropdown().getFirstSelectedOption().getText();
     }
 
+    private Select rolesDropdown() {
+        return new Select(dropdownMenu);
+    }
+
+    public void selectRole(User user) {
+        rolesDropdown().selectByVisibleText(user.getRole());
+    }
 
     public String getUserLogin(User user) {
         usersTableCell = driver.findElements(byTableCell);
@@ -61,7 +73,20 @@ public class UserPage extends InternalPage {
                 return cell.getText();
             }
         }
-        return "Не найден логин в таблице ";
+        System.out.println("Не найден логин в таблице " + user.getLogin());
+        return "!";
+    }
+
+    public void clickCreateNewUser() {
+        createNewUser.click();
+        wait.until(presenceOfElementLocated(byUserForm));
+    }
+
+    public void setCurrentUser(User user) {
+        clickCreateNewUser();
+        dropdownButton.click();
+        selectRole(user);
+        submitButton.click();
     }
 //
 //    public String getUsername() {
