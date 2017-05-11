@@ -18,10 +18,10 @@ public class InternalPage extends AnyPage {
 
     private By byAdminBar = By.cssSelector(".admin");
 
-    @FindBy(css = "#modal > div > a:nth-child(2)")
+    @FindBy(css = "#modal > div:nth-child(2) > a:nth-child(2)")
     private WebElement userEdit;
 
-    @FindBy(css = "#modal > div > a:nth-child(1)")
+    @FindBy(css = "#modal > div:nth-child(2) > a:nth-child(1)")
     private WebElement logoutLink;
 
     @FindBy(css = ".closebtn")
@@ -64,13 +64,14 @@ public class InternalPage extends AnyPage {
     }
 
     public LoginPage clickLogoutLink() {
+        wait.until(presenceOfElementLocated(byAdminBar));
         adminBar.click();
         logoutLink.click();
-//        wait.until(presenceOfElementLocated(pages.loginPage.byUsernameField));
         return pages.loginPage;
     }
 
     public UserEditPage clickChangePassword() {
+        wait.until(presenceOfElementLocated(byAdminBar));
         adminBar.click();
         userEdit.click();
         return pages.userEditPage;

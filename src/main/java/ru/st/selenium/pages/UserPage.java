@@ -68,23 +68,24 @@ public class UserPage extends InternalPage {
         rolesDropdown().selectByVisibleText(user.getRole());
     }
 
-    public String getUserLogin(String login) {
+    public String getUserLoginFromTable(String getLogin) {
         usersTableCell = driver.findElements(byTableCell);
         for (WebElement cell : usersTableCell) {
-            if (cell.getText().trim().equals(login)) {
+            if (cell.getText().trim().equals(getLogin)) {
                 return cell.getText();
             }
         }
-        System.out.println("Не найден логин в таблице " + login);
+        System.out.println("Не найден логин в таблице " + getLogin);
         return "!";
     }
 
-    public void clickCreateNewUser() {
+    public UserPage clickCreateNewUser() {
         createNewUser.click();
         wait.until(presenceOfElementLocated(byUserForm));
+        return this;
     }
 
-    public void setCurrentUserRole(String getRole) {
+    public UserEditPage setCurrentUserRole(String getRole) {
         clickCreateNewUser();
         dropdownButton.click();
         roleList = driver.findElements(byRoles);
@@ -94,6 +95,7 @@ public class UserPage extends InternalPage {
             }
         }
         submitButton.click();
+        return pages.userEditPage;
     }
 //
 //    public String getUsername() {

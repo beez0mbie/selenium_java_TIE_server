@@ -14,10 +14,10 @@ public class MakeNewUsers extends TestBase {
             .setLogin("admin")
             .setPassword("admin");
     private User oti = new User()
-            .setLogin("disp02")
+            .setLogin("otb07")
             .setName("Winner")
             .setPassword("otb")
-            .setRole("Диспетчер")
+            .setRole("Оператор ОТБ")
             .setPhone("123")
             .setMetroStation("Каширская")
             .setMetroLine("Сокольническая линия");

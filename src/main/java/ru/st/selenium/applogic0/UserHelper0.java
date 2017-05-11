@@ -99,6 +99,6 @@ public class UserHelper0 extends DriverBasedHelper implements UserHelper {
 
     @Override
     public boolean isUserInUsersTable(User user) {
-        return pages.userPage.ensurePageLoaded().getUserLogin(user.getLogin()).equals(user.getLogin());
+        return pages.userPage.ensurePageLoaded().getUserLoginFromTable(user.getLogin()).equals(user.getLogin());
     }
 }

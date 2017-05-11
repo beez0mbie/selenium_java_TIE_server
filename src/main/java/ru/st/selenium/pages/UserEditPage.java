@@ -136,8 +136,9 @@ public class UserEditPage extends InternalPage {
         }
     }
 
-    public void clickSubmitButton() {
+    public UserPage clickSubmitButton() {
         submitButton.click();
+        return pages.userPage;
     }
 
 //
