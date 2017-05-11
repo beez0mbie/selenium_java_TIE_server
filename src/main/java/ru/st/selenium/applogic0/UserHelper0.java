@@ -39,12 +39,14 @@ public class UserHelper0 extends DriverBasedHelper implements UserHelper {
                 .setPassword(user.getPassword())
                 .setConfirmPassword(user.getPassword())
                 .clickSubmitButton();
+        pages.userPage.ensurePageLoaded();
     }
 
     @Override
     public void logout() {
         pages.internalPage.ensurePageLoaded()
                 .clickLogoutLink();
+        pages.loginPage.ensurePageLoaded();
     }
 
     @Override

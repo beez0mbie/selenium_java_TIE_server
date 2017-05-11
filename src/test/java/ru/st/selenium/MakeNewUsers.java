@@ -1,5 +1,7 @@
 package ru.st.selenium;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.st.selenium.model.User;
 import ru.st.selenium.pages.TestBase;
@@ -14,13 +16,28 @@ public class MakeNewUsers extends TestBase {
             .setLogin("admin")
             .setPassword("admin");
     private User oti = new User()
-            .setLogin("otb07")
+            .setLogin("oti09")
             .setName("Winner")
             .setPassword("otb")
-            .setRole("Оператор ОТБ")
+            .setRole("Оператор ОТИ")
             .setPhone("123")
             .setMetroStation("Каширская")
             .setMetroLine("Сокольническая линия");
+
+    @BeforeMethod
+    public void mayBeLogoutBefore() {
+        if (app.getUserHelper().isNotLoggedIn()) {
+            return;
+        }
+        app.getUserHelper().logout();
+    }
+
+    @AfterMethod
+    public void mayBeLogoutAfter() {
+        if (app.getUserHelper().isLoggedIn()) {
+            app.getUserHelper().logout();
+        }
+    }
 
     @Test(description = "ID = <T01> Создать пользователя")
     public void test01() throws Exception {

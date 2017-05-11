@@ -67,6 +67,7 @@ public class TestLoginAsAdmin extends TestBase {
         app.getUserHelper().loginWithNewPasswordAs(user);
         app.getNavigationHelper().gotoUserEditPage();
         app.getUserHelper().changePasswordBack(user);
+//        assertTrue(app.getUserHelper().isUserInUsersTable(user), "success change password for current user");
         app.getUserHelper().logout();
         app.getUserHelper().loginWithNewPasswordAs(user);
         assertTrue(app.getUserHelper().isNotLoggedIn());
