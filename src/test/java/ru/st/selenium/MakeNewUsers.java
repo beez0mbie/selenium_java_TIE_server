@@ -20,7 +20,7 @@ public class MakeNewUsers extends TestBase {
             .setLogin("admin")
             .setPassword("admin");
     private User oti = new User()
-            .setLogin("oti02")
+            .setLogin("oti03")
             .setName("Иванов Иван Иванович")
             .setPassword("oti")
             .setRole("Оператор ОТИ")
@@ -73,17 +73,17 @@ public class MakeNewUsers extends TestBase {
 
     @Test(description = "ID = <T01> Создать пользователя")
     public void test01() throws Exception {
-        ArrayList<User> users = new ArrayList<User>();
-        users.add(oti);
-        users.add(otb);
-        users.add(dispetcher);
-        users.add(od);
-        for (User user : users) {
+//        ArrayList<User> users = new ArrayList<User>();
+//        users.add(oti);
+//        users.add(otb);
+//        users.add(dispetcher);
+//        users.add(od);
+//        for (User user : users) {
             app.getUserHelper().loginAs(admin);
-            app.getUserHelper().createNewUser(user);
-            assertTrue(app.getUserHelper().isUserInUsersTable(user));
+            app.getUserHelper().createNewUser(oti);
+            assertTrue(app.getUserHelper().isUserInUsersTable(oti));
             app.getUserHelper().logout();
-        }
+//        }
 
     }
 }

@@ -43,15 +43,19 @@ public class UserEditPage extends InternalPage {
     @FindBy(id = "dropdown-menu-roles")
     private WebElement rolesField;
 
-    @FindBy(css = ".Select-placeholder")
+//    @FindBy(css = ".Select-placeholder")
+    @FindBy(xpath = "//*[@id=\"react-select-2--value\"]")
     private WebElement metroLineDropdown;
 
-    private By byMetroLineDropdown = By.cssSelector(".Select-placeholder");
+//    private By byMetroLineDropdown = By.cssSelector(".Select-placeholder");
+    private By byMetroLineDropdown = By.xpath("//*[@id=\"react-select-2--value\"]");
 
-    @FindBy(css = ".Select-placeholder")
+//    @FindBy(css = ".Select-placeholder")
+    @FindBy(xpath = "//*[@id=\"react-select-2--value\"]")
     private WebElement metroStationDropdown;
 
-    private By byMetroStationDropdown = By.cssSelector(".Select-placeholder");
+//    private By byMetroStationDropdown = By.cssSelector(".Select-placeholder");
+    private By byMetroStationDropdown = By.xpath("//*[@id=\"react-select-2--value\"]");
 
     @FindBy(css = ".Select-control")
     private WebElement metroForm;
@@ -64,6 +68,10 @@ public class UserEditPage extends InternalPage {
     private List<WebElement> metroStationList;
 
     private List<WebElement> usersTable;
+
+    private List<WebElement> tables;
+
+    private By byTables = By.xpath("//*[@id=\"user_form-1\"]/form/div/label");
 
 
     public String getLoginField() {
@@ -97,6 +105,26 @@ public class UserEditPage extends InternalPage {
     public UserEditPage setPhone(String text) {
         phoneNumberField.clear();
         phoneNumberField.sendKeys(text);
+        return this;
+    }
+
+    private String getMetroType() {
+        tables = driver.findElements(byTables);
+        for (WebElement table : tables) {
+            if (table.getText().equals("Линия метро")) {
+                return table.getText();
+            }
+            if (table.getText().equals("Станция метро")) {
+                return table.getText();
+            }
+        }
+        return null;
+    }
+    public UserEditPage setMetro(String text) {
+        tables = driver.findElements(byTables);
+        for (WebElement table : tables) {
+            System.out.println(table.getText());
+        }
         return this;
     }
 
